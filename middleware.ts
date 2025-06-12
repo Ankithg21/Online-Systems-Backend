@@ -12,6 +12,10 @@ export default withAuth(
         if (!token) {
           return false;
         }
+        // Allow webhook endpoint
+        if (req.nextUrl.pathname.startsWith("/api/webhook")) {
+          return true;
+        }
         // Allow auth-related paths to be accessed without authentication
         if (req.nextUrl.pathname.startsWith("/api/auth") || 
             req.nextUrl.pathname === '/login' ||
